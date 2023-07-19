@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Team</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css"/>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <script src="/JS/teamTable.js"></script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand" style="background: green;">
+    <div class="container">
+        <a href="http://localhost:8080" class="navbar-brand">SportsEdge</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="/game" class="nav-link">Games</a>
+            </li>
+            <li class="nav-item">
+                <a href="/player" class="nav-link">Players</a>
+            </li>
+        </ul>
+        <div class="navbar-text">Strategize. Manage. Dominate.</div>
+    </div>
+</nav>
+<br>
+<div class="container">
+    <div id="teamTableContainer"></div>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addForm">Add Team
+    </button>
+    <br><br>
+    <form class="modal fade" id="addForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Add Team</div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <input type="text" id="name" placeholder="Name" required class="form-control">
+                        <label for="name" class="form-label">Name</label>
+                    </div>
+                    <br>
+                    <div class="form-floating">
+                        <input type="text" id="country" placeholder="Country" required class="form-control">
+                        <label for="country" class="form-label">Country</label>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success mb-3" id="submitFormButton" onclick="createTeam()">Add Team
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+    const form = document.querySelector('#addForm');
+    form.addEventListener('submit', e => {
+        if(!form.checkValidity()){
+            event.preventDefault();
+        }
+        form.classList.add('was-validated');
+    });
+
+
+    </script>
+
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteForm">Delete Team</button>
+    <br><br>
+    <form class="modal fade" id="deleteForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Delete Team</div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <input type="number" id="deleteId" placeholder="Id" class="form-control" required>
+                        <label for="deleteId" class="form-label">Id</label>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger mb-3" id="deleteFormButton" onclick="deleteTeam()">Delete Team
+                    </button>
+                    <button type="button" class="btn btn-danger mb-3" id="deleteAllButton" onclick="deleteAllTeams()">Delete All
+                        Teams
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editForm">Edit Team
+    </button>
+    <br><br>
+    <form class="modal fade" id="editForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Edit Team</div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <input type="number" id="editId" placeholder="Id" class="form-control" required>
+                        <label for="editId" class="form-label">Id</label>
+                    </div><br>
+                    <div class="form-floating">
+                        <input type="text" id="editName" placeholder="Name" class="form-control" required>
+                        <label for="editName" class="form-label">Name</label>
+                    </div><br>
+                    <div class="form-floating">
+                        <input type="text" id="editCountry" placeholder="Country" class="form-control" required>
+                        <label for="editCountry" class="form-label">Country</label>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary mb-3" id="editFormButton" onclick="editTeam()">Edit Team
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
